@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scrasp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,8 +11,16 @@ namespace Scrasp.Controllers
     {
         public ActionResult Index()
         {
-            List<string> todo = getTodoList(); 
-            ViewBag.Todo = todo;
+            List<string> todo = getTodoList();
+            User user1      = new User("jeSuiUzer", "Pa$$w0rd", "coder");
+            Task task1      = new Task("sa sagit 2 codé un fonctionaélté", 43, user1, new DateTime(), 10);
+            Task task2      = new Task("sa sagit 2 codé un fonctionaélté un pe plus", 44, user1, new DateTime(), 6);
+            List<Task> list = new List<Task>(){ task1, task2};
+            
+            Story story     = new Story("sa sagit de faire 1 site", "refNAME", "utilisateur connecté", 42, 24, 3, list);
+       
+            ViewBag.Story   = story;
+            ViewBag.Todo    = todo;
 
             return View();
         }
@@ -30,6 +39,7 @@ namespace Scrasp.Controllers
 
             // Ajoutez-y un utilisateur supplémentaire
             // ...
+
             ViewBag.Message = "Utilisateur ajouté";
             return View("Index");
         }
