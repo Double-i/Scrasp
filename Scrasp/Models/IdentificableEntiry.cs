@@ -7,12 +7,12 @@ namespace Scrasp.Models
 {
     public abstract class IdentifiableEntity
     {
-        private int lastId = 0;
+        private static int lastId = 0;
         private int id;
 
-        protected IdentifiableEntity()
+        public IdentifiableEntity()
         {
-            this.lastId++;
+            lastId++;
             this.id = LastId;
         }
 

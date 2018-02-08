@@ -21,5 +21,10 @@ namespace Scrasp.Models
         public string UserName { get => userName; set => userName = value; }
         public string Password { get => password; set => password = value; }
         public string Role { get => role; set => role = value; }
+
+        public override string ToString()
+        {
+            return string.Format("User id: {0} with username: {1}", this.Id, this.UserName);
+        }
     }
 }

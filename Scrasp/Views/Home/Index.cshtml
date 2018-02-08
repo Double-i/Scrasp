@@ -4,8 +4,8 @@
     ViewBag.Title = "Accueil";
     List<string> todolist = ViewBag.Todo;
     Story story = ViewBag.Story;
-    List<Task> tasks = story.Tasks;
 }
+
 
 @if (ViewBag.Message != null)
 {
@@ -22,18 +22,27 @@
 </div>
 <div class="container">
     <h3>Données</h3>
-
-    <h5>@story.RefName</h5>
-    <ul>
-        @foreach (Task task in tasks)
-        {
-            <li>@task.Description - @task.Owner.UserName</li>
-        }
-    </ul>
+    @if (story != null)
+    {
+        <h5>@story.RefName</h5>
+        <ul>
+            @foreach (Task task in story.Tasks)
+            {
+                <li>@task.Description - @task.Owner.UserName</li>
+            }
+        </ul>
+    }
 
     <h4>Stories</h4>
     <h4>Tâches</h4>
     <h4>Personnes</h4>
+    @if (ViewBag.NewUser != null)
+    {
+        <ul>
+            <li>@ViewBag.NewUser.UserName</li>
+        </ul>
+    }
+
 </div>
 <div class="container">
     <h3>Actions</h3>

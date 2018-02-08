@@ -9,18 +9,30 @@ namespace Scrasp.Controllers
 {
     public class HomeController : Controller
     {
+        private List<User> users;
+
+        public HomeController()
+        {
+            users = new List<User>();
+            User user1 = new User("jeSuiUzer", "Pa$$w0rd", "coder");
+            User user2 = new User("jeSuiUzer2", "Pa$$w0rd", "coder");
+            users.Add(user1);
+            users.Add(user2);
+
+
+            Task task1 = new Task("sa sagit 2 codé un fonctionaélté", 43, users[0], new DateTime(), 10);
+            Task task2 = new Task("sa sagit 2 codé un fonctionaélté un pe plus", 44, users[1], new DateTime(), 6);
+            List<Task> list = new List<Task>() { task1, task2 };
+
+            Story story = new Story("sa sagit de faire 1 site", "refname", "utilisateur connecté", 42, 24, 3, list);
+            ViewBag.story = story;
+        }
+
         public ActionResult Index()
         {
             List<string> todo = getTodoList();
-            User user1      = new User("jeSuiUzer", "Pa$$w0rd", "coder");
-            Task task1      = new Task("sa sagit 2 codé un fonctionaélté", 43, user1, new DateTime(), 10);
-            Task task2      = new Task("sa sagit 2 codé un fonctionaélté un pe plus", 44, user1, new DateTime(), 6);
-            List<Task> list = new List<Task>(){ task1, task2};
-            
-            Story story     = new Story("sa sagit de faire 1 site", "refNAME", "utilisateur connecté", 42, 24, 3, list);
-       
-            ViewBag.Story   = story;
-            ViewBag.Todo    = todo;
+
+            ViewBag.Todo = todo;
 
             return View();
         }
@@ -36,29 +48,43 @@ namespace Scrasp.Controllers
             // Préparez vos données comme dans la méthode Index
             List<string> todo = getTodoList();
             ViewBag.Todo = todo;
+            User newUser = new User("jeSuiNewUze3r", "Pa$$w0rd", "coder");
+            users.Add(newUser);
+            ViewBag.NewUser = newUser;
 
-            // Ajoutez-y un utilisateur supplémentaire
-            // ...
 
             ViewBag.Message = "Utilisateur ajouté";
             return View("Index");
         }
 
+
         public ActionResult Rename(int id)
         {
+
             // Préparez vos données comme dans la méthode Index
             List<string> todo = getTodoList();
+            users = new List<User>();
+            User user1 = new User("jeSuiUzer", "Pa$$w0rd", "coder");
+            User user2 = new User("jeSuiUzer2", "Pa$$w0rd", "coder");
+            users.Add(user1);
+            users.Add(user2);
+
+            User user = users.Find(x => x.Id == 8);
+            if (user != null) user.UserName = "Gorbatchov";
+
+
             ViewBag.Todo = todo;
 
-            // Ajoutez-y un utilisateur supplémentaire
-            // ...
-            ViewBag.Message = string.Format("Utilisateur {0} renommé",id);
+
+
+            ViewBag.Message = string.Format("Utilisateur {0} renommé : {1}", id, user);
             return View("Index");
+
         }
 
         private List<string> getTodoList()
         {
-            return 
+            return
                 new List<string>(new string[] {
                     "Coder les classes décrites dans le modèle Scrasp.asta",
                     "Instancier des objets Story, Task et User hardcodés dans HomeController.Index, les mettre dans des listes, les passer à la vue avec le ViewBag et les afficher dans la section Données ci-dessous",
@@ -71,5 +97,9 @@ namespace Scrasp.Controllers
                 });
         }
 
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

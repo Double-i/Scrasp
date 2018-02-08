@@ -17,13 +17,13 @@ namespace Scrasp.Models
 
         public Story(string description, string refName, string actor, int type, int state, int points, List<Task> tasks)
         {
-            this.description    = description;
-            this.refName        = refName;
-            this.actor          = actor;
-            this.type           = type;
-            this.state          =  state;
-            this.points         = points;
-            this.tasks          = tasks;
+            this.description = description;
+            this.refName = refName;
+            this.actor = actor;
+            this.type = type;
+            this.state = state;
+            this.points = points;
+            this.tasks = tasks;
         }
 
         public string Description { get => description; set => description = value; }
@@ -33,5 +33,5 @@ namespace Scrasp.Models
         public int State { get => state; set => state = value; }
         public int Points { get => points; set => points = value; }
         public List<Task> Tasks { get => tasks; set => tasks = value; }
-    }
+    } 
 }
